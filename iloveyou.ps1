@@ -76,6 +76,6 @@ Write-Host '[#############################>] 100% - IMAGE COMPILED SUCCESSFULLY'
 Start-Sleep -Milliseconds 1000
 
 # Download HTML gift
-Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Vanshrajchoudhary/surprise-html/main/surprise.html' -OutFile "$env:USERPROFILE\Desktop\I love you!.html" -UseBasicParsing
+Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Vanshrajchoudhary/surprise-html/main/surprise.html' -OutFile "$env:USERPROFILE\Desktop\I love you.html" -UseBasicParsing
 Start-Sleep -Milliseconds 1000
 Start-Process "$env:USERPROFILE\Desktop\I love you.html"
