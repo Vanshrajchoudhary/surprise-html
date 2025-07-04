@@ -81,7 +81,7 @@ Start-Sleep -Milliseconds 1000
 # Download and open HTML gift
 $htmlPath = Join-Path -Path $env:USERPROFILE -ChildPath "Desktop\I love you.html"
 try {
-    Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Vanshrajchoudhary/surprise-html/main/surprise.html' -OutFile $htmlPath -UseBasicParsing -ErrorAction Stop
+    Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Vanshrajchoudhary/surprise-html/refs/heads/main/suprise.html' -OutFile $htmlPath -UseBasicParsing -ErrorAction Stop
     Start-Sleep -Milliseconds 1000
     Start-Process $htmlPath
 }
