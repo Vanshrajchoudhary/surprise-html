@@ -54,9 +54,6 @@ $reasons = @(
 '52. Simply because you''re you'
 )
 
-# Resize window
-$Host.UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size(120, 40)
-$Host.UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size(120, 1000)
 
 # Typewriter effect
 foreach ($reason in $reasons) {
@@ -79,13 +76,33 @@ Write-Host '[#############################>] 100% - IMAGE COMPILED SUCCESSFULLY'
 Start-Sleep -Milliseconds 1000
 
 # Download and open HTML gift
-$htmlPath = Join-Path -Path $env:USERPROFILE -ChildPath "Desktop\I love you.html"
+$desktopPath = [Environment]::GetFolderPath("Desktop")
+$htmlPath = Join-Path -Path $desktopPath -ChildPath "ILoveYou.html"  # Local filename
+
 try {
-    Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Vanshrajchoudhary/surprise-html/refs/heads/main/suprise.html' -OutFile $htmlPath -UseBasicParsing -ErrorAction Stop
-    Start-Sleep -Milliseconds 1000
-    Start-Process $htmlPath
+    Write-Host "`n>>> Preparing your visual surprise..."
+    
+    # Correct URL with surprise1.html
+    $imageUrl = 'https://raw.githubusercontent.com/Vanshrajchoudhary/surprise-html/main/surprise1.html'
+    
+    # Ensure Desktop exists
+    if (-not (Test-Path $desktopPath)) {
+        New-Item -ItemType Directory -Path $desktopPath -Force | Out-Null
+    }
+
+    # Download file
+    Invoke-WebRequest -Uri $imageUrl -OutFile $htmlPath -UseBasicParsing -ErrorAction Stop
+    
+    # Verify and open
+    if (Test-Path $htmlPath) {
+        Start-Process $htmlPath
+    } else {
+        Write-Host "Error: Downloaded file not found!" -ForegroundColor Red
+        Write-Host "Expected at: $htmlPath" -ForegroundColor Yellow
+    }
 }
 catch {
-    Write-Host "Error creating your gift: $_" -ForegroundColor Red
-    Start-Sleep -Seconds 5
+    Write-Host "ERROR: $($_.Exception.Message)" -ForegroundColor Red
+    Write-Host "Failed URL: $imageUrl" -ForegroundColor Yellow
 }
+Start-Sleep -Seconds 5
