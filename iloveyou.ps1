@@ -13,7 +13,7 @@ Write-Host @"
                                |__/                    
 
 "@ -ForegroundColor Magenta
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 1
 
 # 52 Reasons Array (Updated Order)
 $reasons = @(
