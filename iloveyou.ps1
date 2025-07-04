@@ -98,41 +98,25 @@ Start-Sleep -Milliseconds 1000
 
 # Download and open HTML gift
 $desktopPath = [Environment]::GetFolderPath("Desktop")
-$htmlPath = Join-Path -Path $desktopPath -ChildPath "Our_Love.html"  # Space-free filename
+$htmlPath = Join-Path -Path $desktopPath -ChildPath "Our_Love.html"
 
 try {
     Write-Host "`n>>> PREPARING YOUR VISUAL SURPRISE..." -ForegroundColor Magenta
     
-    # Try multiple possible URLs
-    $possibleUrls = @(
-        'https://raw.githubusercontent.com/Vanshrajchoudhary/surprise-html/main/surprise1.html',
-        'https://raw.githubusercontent.com/Vanshrajchoudhary/surprise-html/main/surprise.html',
-        'https://raw.githubusercontent.com/Vanshrajchoudhary/surprise-html/master/surprise1.html'
-    )
-
-    $success = $false
-    foreach ($url in $possibleUrls) {
-        try {
-            Invoke-WebRequest -Uri $url -OutFile $htmlPath -UseBasicParsing -ErrorAction Stop
-            if (Test-Path $htmlPath) {
-                $success = $true
-                break
-            }
-        } catch {
-            Write-Host "Attempt failed: $url" -ForegroundColor DarkGray
-        }
-    }
-
-    if ($success) {
+    # Using your exact URL
+    $url = 'https://raw.githubusercontent.com/Vanshrajchoudhary/surprise-html/refs/heads/main/suprise1.html'
+    Invoke-WebRequest -Uri $url -OutFile $htmlPath -UseBasicParsing -ErrorAction Stop
+    
+    if (Test-Path $htmlPath) {
         Start-Process $htmlPath
         Write-Host "SUCCESS! Opening your gift..." -ForegroundColor Green
     } else {
-        Write-Host "ERROR: Couldn't download the surprise file" -ForegroundColor Red
-        Write-Host "Please check the GitHub URL exists:" -ForegroundColor Yellow
-        Write-Host $possibleUrls[0] -ForegroundColor Cyan
+        Write-Host "ERROR: File downloaded but not found!" -ForegroundColor Red
     }
 }
 catch {
-    Write-Host "FINAL ERROR: $($_.Exception.Message)" -ForegroundColor Red
+    Write-Host "ERROR: $($_.Exception.Message)" -ForegroundColor Red
+    Write-Host "Failed URL: $url" -ForegroundColor Yellow
+    Write-Host "Please verify the file exists at this exact URL" -ForegroundColor Cyan
 }
 Start-Sleep -Seconds 5
