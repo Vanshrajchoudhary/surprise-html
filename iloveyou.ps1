@@ -63,7 +63,7 @@ foreach ($reason in $reasons) {
         Start-Sleep -Milliseconds 40
     }
     Write-Host ''
-    Start-Sleep -Seconds 4
+    Start-Sleep -Seconds 2
 }
 
 # Loading animation
@@ -83,7 +83,7 @@ try {
     Write-Host "`n>>> Preparing your visual surprise..."
     
     # Correct URL with surprise1.html
-    $imageUrl = 'https://raw.githubusercontent.com/Vanshrajchoudhary/surprise-html/main/surprise1.html'
+    $imageUrl = 'https://raw.githubusercontent.com/Vanshrajchoudhary/surprise-html/refs/heads/main/suprise1.html'
     
     # Ensure Desktop exists
     if (-not (Test-Path $desktopPath)) {
