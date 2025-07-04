@@ -1,7 +1,5 @@
 # Set window title and size
 $Host.UI.RawUI.WindowTitle = "52 Reasons Why I Love You"
-$Host.UI.RawUI.WindowSize = New-Object System.Management.Automation.Host.Size(120,40)
-$Host.UI.RawUI.BufferSize = New-Object System.Management.Automation.Host.Size(120,1000)
 
 # Display title art
 Write-Host @"
